@@ -1,0 +1,71 @@
+{
+	"name": "taro-exclusive-sitemap",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "wp-env start",
+		"update": "wp-env start --update",
+		"stop": "wp-env stop",
+		"env": "wp-env",
+		"cli": "wp-env run cli wp",
+		"cli:test": "wp-env run tests-cli wp",
+		"build": "npm run build:js && npm run build:css && npm run build:block && npm run lib:normalize && npm run dump && npm run imagemin",
+		"build:block": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
+		"build:css": "sass ./src/scss/:./build/css/ && postcss ./build/css/**/*.css --replace",
+		"build:js": "node ./bin/compiler.js js",
+		"dump": "node ./bin/compiler.js dump",
+		"lint": "npm run lint:js && npm run lint:css",
+		"lint:css": "wp-scripts lint-style ./src/**/*.scss",
+		"lint:js": "wp-scripts lint-js ./src",
+		"format:js": "wp-scripts format-js ./src",
+		"watch": "npm-watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tarosky/taro-exclusive-sitemap.git"
+	},
+	"keywords": [
+		"wordpress"
+	],
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"author": "Tarosky INC.",
+	"license": "GPL-3.0-or-later",
+	"bugs": {
+		"url": "https://github.com/tarosky/taro-exclusive-sitemap/issues"
+	},
+	"homepage": "https://github.com/tarosky/taro-exclusive-sitemap#readme",
+	"devDependencies": {
+		"@kunoichi/grab-deps": "^1.3.1",
+		"@wordpress/create-block": "^4.42.0",
+		"@wordpress/env": "^9.10.0",
+		"@wordpress/scripts": "^27.9.0",
+		"@wordpress/stylelint-config": "^21.41.0",
+		"cssnano": "^7.0.1",
+		"glob": "^10.3.15",
+		"npm-watch": "^0.13.0",
+		"postcss-cli": "^11.0.0"
+	},
+	"watch": {
+		"build:block": {
+			"extensions": "js,scss,json",
+			"patterns": [
+				"src/blocks"
+			]
+		},
+		"lint:css": {
+			"extensions": "scss",
+			"patterns": [
+				"src/scss"
+			]
+		},
+		"lint:js": {
+			"extensions": "js",
+			"patterns": [
+				"src"
+			]
+		}
+	}
+}

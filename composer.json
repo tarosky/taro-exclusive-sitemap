@@ -1,0 +1,38 @@
+{
+	"name": "tarosky/taro-exclusive-sitemap",
+	"description": "",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Tarosky INC.",
+			"email": "hi@tarosky.co.jp"
+		}
+	],
+	"scripts": {
+		"lint": [
+			"phpcs --standard=phpcs.ruleset.xml $(find ./ -name '*.php')"
+		],
+		"fix": [
+			"phpcbf --standard=phpcs.ruleset.xml $(find ./ -name '*.php')"
+		]
+	},
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "*",
+		"wp-coding-standards/wpcs": "*",
+		"phpcompatibility/php-compatibility": "*",
+		"dealerdirect/phpcodesniffer-composer-installer": "*"
+	},
+	"autoload": {
+		"classmap": ["includes/"]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}
