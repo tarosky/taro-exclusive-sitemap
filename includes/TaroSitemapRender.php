@@ -77,7 +77,7 @@ class TaroSitemapRender extends TaroSitemapSingleton {
 	 * @return string[]
 	 */
 	public function get_urls() {
-		$urls = array_values( array_filter( array_map( function( $url ) {
+		$urls = array_values( array_filter( array_map( function ( $url ) {
 			return esc_url( $url );
 		}, preg_split( "@(\r\n|\r|\n)@u", $this->get_option_value() ) ) ) );
 		return apply_filters( 'ts_esm_urls', $urls );

@@ -55,10 +55,10 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 			return;
 		}
 		// Section.
-		add_settings_section( 'ts_esm_section', __( 'Settings', 'ts-esm' ), function() {
+		add_settings_section( 'ts_esm_section', __( 'Settings', 'ts-esm' ), function () {
 		}, $this->slug );
 		// Fields.
-		add_settings_field( static::OPTION_KEY, __( 'URLs', 'ts-esm' ), function() {
+		add_settings_field( static::OPTION_KEY, __( 'URLs', 'ts-esm' ), function () {
 			$placeholders = implode( "\n", [
 				'e.g.',
 				'https://example.com/article/123/?fbcid=1234567890',
@@ -78,7 +78,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 		}, $this->slug, 'ts_esm_section' );
 		register_setting( $this->slug, static::OPTION_KEY );
 		// URL check fields.
-		add_settings_field( static::OPTION_KEY . '_url', __( 'Sitemap URL', 'ts-esm' ), function() {
+		add_settings_field( static::OPTION_KEY . '_url', __( 'Sitemap URL', 'ts-esm' ), function () {
 			printf(
 				'<input type="url" value="%s" readonly style="%s" />',
 				esc_url( $this->sitemap_url() ),
@@ -90,6 +90,5 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 				sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', $this->sitemap_url(), __( 'Preview', 'ts-esm' ) )
 			);
 		}, $this->slug, 'ts_esm_section' );
-
 	}
 }
