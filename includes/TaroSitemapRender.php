@@ -29,6 +29,16 @@ class TaroSitemapRender extends TaroSitemapSingleton {
 	 * @return void
 	 */
 	public function render() {
+		$urls = $this->get_urls();
+		if ( empty( $urls ) ) {
+			// If URL not found, 404
+			wp_die( 'No sitemap data.', '', [
+				'status'    => 404,
+				'response'  => '404',
+				'back_link' => true,
+			] );
+		}
+		// Render sitemap.
 		header( 'Content-Type: application/xml; charset=' . get_option( 'blog_charset' ), true );
 		echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?>' . PHP_EOL;
 		?>
@@ -37,7 +47,7 @@ class TaroSitemapRender extends TaroSitemapSingleton {
 			xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
 			xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 			xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-			<?php foreach ( $this->get_urls() as $url ) : ?>
+			<?php foreach ( $urls as $url ) : ?>
 				<url>
 					<loc><?php echo $url; ?></loc>
 				</url>

@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Tarosky Sitemap
-Plugin URI: https://wordpress.org/extend/plugins/taro-sitemap
+Plugin Name: Taro Exclusive Sitemap
+Plugin URI: https://wordpress.org/extend/plugins/taro-exclusive-sitemap
 Description: Yet another sitemap plugin with more than 200,000 posts.
 Version: nightly
 Author: Tarosky INC

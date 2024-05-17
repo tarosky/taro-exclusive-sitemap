@@ -31,7 +31,7 @@ abstract class TaroSitemapSingleton {
 	/**
 	 * Save option value.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function get_option_value() {
 		return (string) get_option( static::OPTION_KEY, '' );
@@ -40,7 +40,7 @@ abstract class TaroSitemapSingleton {
 	/**
 	 * Sitemap URL.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	public function sitemap_url() {
 		return home_url( 'exclusive-sitemap.xml' );
