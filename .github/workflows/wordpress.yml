@@ -54,7 +54,7 @@ jobs:
         uses: tarosky/workflows/actions/versioning@main
         with:
           version: ${{ github.ref }}
-          files: readme.txt,taro-series.php
+          files: readme.txt,taro-exclusive-sitemap.php
 
       - name: Clean package and Create Zip
         run: |
