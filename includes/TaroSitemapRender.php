@@ -40,7 +40,7 @@ class TaroSitemapRender extends TaroSitemapSingleton {
 		}
 		// Render sitemap.
 		header( 'Content-Type: application/xml; charset=' . get_option( 'blog_charset' ), true );
-		echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?>' . PHP_EOL;
+		echo '<?xml version="1.0" encoding="' . esc_attr( get_option( 'blog_charset' ) ) . '"?>' . PHP_EOL;
 		?>
 		<urlset
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -49,7 +49,7 @@ class TaroSitemapRender extends TaroSitemapSingleton {
 			xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 			<?php foreach ( $urls as $url ) : ?>
 				<url>
-					<loc><?php echo $url; ?></loc>
+					<loc><?php echo esc_url( $url ); ?></loc>
 				</url>
 			<?php endforeach; ?>
 			</urlset>

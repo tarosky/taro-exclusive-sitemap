@@ -34,7 +34,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Exclusive Sitemap', 'ts-esm' ); ?></h1>
-			<form method="post" action="<?php echo admin_url( 'options.php' ); ?>">
+			<form method="post" action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>">
 				<?php
 				settings_fields( $this->slug );
 				do_settings_sections( $this->slug );
@@ -87,7 +87,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 			printf(
 				'<p class="description">%s &raquo; %s</p>',
 				esc_html__( 'Register URL above on Google Search Console.', 'ts-esm' ),
-				sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', $this->sitemap_url(), __( 'Preview', 'ts-esm' ) )
+				sprintf( '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>', esc_url( $this->sitemap_url() ), esc_html__( 'Preview', 'ts-esm' ) )
 			);
 		}, $this->slug, 'ts_esm_section' );
 	}
