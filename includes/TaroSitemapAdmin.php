@@ -22,7 +22,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 	 * @return void
 	 */
 	public function add_menu() {
-		add_submenu_page( 'tools.php', __( 'Exclusive Sitemap', 'ts-esm' ), __( 'Exclusive Sitemap', 'ts-esm' ), 'manage_options', $this->slug, [ $this, 'render' ] );
+		add_submenu_page( 'tools.php', __( 'Exclusive Sitemap', 'ts-esm' ), __( 'Exclusive Sitemap', 'ts-esm' ), 'edit_others_posts', $this->slug, [ $this, 'render' ] );
 	}
 
 	/**
