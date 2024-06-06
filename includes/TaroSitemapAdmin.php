@@ -41,7 +41,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 			}
 			update_option( self::OPTION_KEY, filter_input( INPUT_POST, self::OPTION_KEY ) );
 			wp_safe_redirect( add_query_arg( [
-				'page'    => $this->slug,
+				'page' => $this->slug,
 			], admin_url( 'tools.php' ) ) );
 			exit;
 		} catch ( \Exception $e ) {
