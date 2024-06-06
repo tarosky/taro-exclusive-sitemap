@@ -14,6 +14,7 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 	protected function init() {
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
+		add_action( 'wp_ajax_' . $this->slug, [ $this, 'admin_ajax' ] );
 	}
 
 	/**
@@ -22,7 +23,34 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 	 * @return void
 	 */
 	public function add_menu() {
-		add_submenu_page( 'tools.php', __( 'Exclusive Sitemap', 'ts-esm' ), __( 'Exclusive Sitemap', 'ts-esm' ), 'edit_others_posts', $this->slug, [ $this, 'render' ] );
+		add_submenu_page( 'tools.php', __( 'Exclusive Sitemap', 'ts-esm' ), __( 'Exclusive Sitemap', 'ts-esm' ), 'edit_posts', $this->slug, [ $this, 'render' ] );
+	}
+
+	/**
+	 * Save option page.
+	 *
+	 * @return void
+	 */
+	public function admin_ajax() {
+		try {
+			if ( ! check_admin_referer( $this->slug ) ) {
+				throw new \Exception( __( 'Invalid nonce.', 'ts-esm' ), 400 );
+			}
+			if ( ! current_user_can( 'edit_posts' ) ) {
+				throw new \Exception( __( 'You have no permission.', 'ts-esm' ), 400 );
+			}
+			update_option( self::OPTION_KEY, filter_input( INPUT_POST, self::OPTION_KEY ) );
+			wp_safe_redirect( add_query_arg( [
+				'page'    => $this->slug,
+			], admin_url( 'tools.php' ) ) );
+			exit;
+		} catch ( \Exception $e ) {
+			wp_die( $e->getMessage(), get_status_header_desc( $e->getCode() ), [
+				'status'    => $e->getCode(),
+				'response'  => $e->getCode(),
+				'back_link' => true,
+			] );
+		}
 	}
 
 	/**
@@ -34,9 +62,10 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Exclusive Sitemap', 'ts-esm' ); ?></h1>
-			<form method="post" action="<?php echo esc_url( admin_url( 'options.php' ) ); ?>">
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>">
+				<input type="hidden" name="action" value="<?php echo esc_attr( $this->slug ); ?>" />
 				<?php
-				settings_fields( $this->slug );
+				wp_nonce_field( $this->slug );
 				do_settings_sections( $this->slug );
 				submit_button();
 				?>
@@ -76,7 +105,6 @@ class TaroSitemapAdmin extends TaroSitemapSingleton {
 				esc_html__( 'Enter URLs to include in the exclusive sitemap.', 'ts-esm' )
 			);
 		}, $this->slug, 'ts_esm_section' );
-		register_setting( $this->slug, static::OPTION_KEY );
 		// URL check fields.
 		add_settings_field( static::OPTION_KEY . '_url', __( 'Sitemap URL', 'ts-esm' ), function () {
 			printf(
