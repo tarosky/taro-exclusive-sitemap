@@ -42,7 +42,7 @@
 		"@wordpress/create-block": "^4.42.0",
 		"@wordpress/env": "^9.10.0",
 		"@wordpress/scripts": "^27.9.0",
-		"@wordpress/stylelint-config": "^21.41.0",
+		"@wordpress/stylelint-config": "^22.2.0",
 		"cssnano": "^7.0.1",
 		"glob": "^10.3.15",
 		"npm-watch": "^0.13.0",
